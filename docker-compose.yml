@@ -44,8 +44,6 @@ services:
       - "8080:80"
     depends_on:
       - frontend
-    volumes:
-      - ./database/nginx.conf:/etc/nginx/nginx.conf
 
 volumes:
   mongo-data:
