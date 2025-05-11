@@ -18,17 +18,22 @@ jobs:
           echo "Setting Docker env to Minikube..."
           minikube docker-env | Invoke-Expression
 
-      - name: Build Docker image
+      - name: Build Docker images
         run: |
-          docker build -t zunair77/social-media-app:latest .
+          echo "Building frontend image..."
+          docker build -t zunair77/social-media-frontend:latest ./client
+          echo "Building backend image..."
+          docker build -t zunair77/social-media-backend:latest ./server
 
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
 
-      - name: Push image to Docker Hub
-        run: docker push zunair77/social-media-app:latest
+      - name: Push images to Docker Hub
+        run: |
+          docker push zunair77/social-media-frontend:latest
+          docker push zunair77/social-media-backend:latest
 
-      - name: Deploy to Minikube
+      - name: Apply Kubernetes Manifests
         run: |
           kubectl apply -f k8s/deployment.yaml
           kubectl apply -f k8s/service.yaml
