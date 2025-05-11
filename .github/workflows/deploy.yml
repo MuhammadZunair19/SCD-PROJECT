@@ -18,12 +18,20 @@ jobs:
           echo "Setting Docker env to Minikube..."
           minikube docker-env | Invoke-Expression
 
+      - name: Set kubectl context to Minikube
+        run: |
+          kubectl config use-context minikube
+
+      - name: List directory contents (Debugging)
+        run: |
+          dir
+
       - name: Build Docker images
         run: |
           echo "Building frontend image..."
-          docker build -t social-media-frontend:latest ./client
+          docker build -t zunair77/social-media-frontend:latest ./client
           echo "Building backend image..."
-          docker build -t social-media-backend:latest ./Server
+          docker build -t zunair77/social-media-backend:latest ./Server
 
       - name: Login to Docker Hub
         run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
