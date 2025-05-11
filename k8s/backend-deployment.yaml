@@ -1,7 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: backend-deployment
+  namespace: socialmedia
 spec:
   replicas: 1
   selector:
@@ -14,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: your-dockerhub-username/backend-app:latest
+          image: zunair77/social-media-backend:latest
           ports:
             - containerPort: 5000
           env:
