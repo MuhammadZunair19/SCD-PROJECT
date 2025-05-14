@@ -10,7 +10,7 @@ import UploadRoute from "./Routes/UploadRoute.js";
 
 // Routes123
 const app = express();
-
+//1
 // to serve images for public (public folder)
 app.use(express.static("public"));
 app.use("/images", express.static("images"));
