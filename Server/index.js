@@ -8,7 +8,7 @@ import UserRoute from "./Routes/UserRoute.js";
 import PostRoute from "./Routes/PostRoute.js";
 import UploadRoute from "./Routes/UploadRoute.js";
 
-// Routes
+// Routes123
 const app = express();
 
 // to serve images for public (public folder)
